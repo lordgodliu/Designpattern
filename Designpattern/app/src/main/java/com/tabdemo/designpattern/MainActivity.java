@@ -9,6 +9,8 @@ import com.tabdemo.designpattern.observer.AndroidObervable;
 import com.tabdemo.designpattern.observer.PersonObserver;
 import com.tabdemo.designpattern.observer.diy.WeatherObervable;
 import com.tabdemo.designpattern.observer.diy.WeatherOberver;
+import com.tabdemo.designpattern.proxy.Image;
+import com.tabdemo.designpattern.proxy.ProxyImage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +21,18 @@ public class MainActivity extends AppCompatActivity {
 
         postObs();
         postDiyObs();
+        proxy();
+
+    }
+
+    /**
+     * 代理模式测试
+     */
+    private void proxy() {
+        Image mImage1 = new ProxyImage("My.Image1");
+        Image mImage2 = new ProxyImage("My.Image2");
+        mImage1.displayImage();
+        mImage2.displayImage();
     }
 
 

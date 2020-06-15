@@ -9,5 +9,4 @@ public class ConB extends Product {
         Log.d("XXXXXXXXXXXXX","BBBBBBBBBBBBBBBBBBBBB");
     }
 
-
 }
