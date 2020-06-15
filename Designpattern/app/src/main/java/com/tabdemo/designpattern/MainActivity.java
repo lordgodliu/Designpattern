@@ -12,6 +12,11 @@ import com.tabdemo.designpattern.abs_factory.XIMIPhone;
 import com.tabdemo.designpattern.abs_factory.component;
 import com.tabdemo.designpattern.builder.MyBuild;
 import com.tabdemo.designpattern.builder.MyData;
+import com.tabdemo.designpattern.command.BakeChickenWingCommand;
+import com.tabdemo.designpattern.command.BakeMuttonCommand;
+import com.tabdemo.designpattern.command.Barbecuer;
+import com.tabdemo.designpattern.command.Command;
+import com.tabdemo.designpattern.command.Waiter;
 import com.tabdemo.designpattern.factory.MyFactory;
 import com.tabdemo.designpattern.factory.Product;
 import com.tabdemo.designpattern.observer.AndroidObervable;
@@ -30,11 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
 
-
-
-
-
-
     }
 
     private void initView() {
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
+        findViewById(R.id.btn6).setOnClickListener(this);
     }
 
 
@@ -92,7 +93,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ximiPhone.createBattery().showBatteryName();
                 break;
 
+            case R.id.btn6://命令模式
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 命令模式");
+                initCommand();
+                break;
         }
+    }
+
+    /**
+     * 命令模式2
+     */
+    private void initCommand() {
+        Barbecuer boy = new Barbecuer();
+        Command bakeMuttonCommand1 = new BakeMuttonCommand(boy);
+        Command bakeMuttonCommand2 = new BakeMuttonCommand(boy);
+        Command bakeChickenWingCommand = new BakeChickenWingCommand(boy);
+        Waiter girl = new Waiter();
+        girl.setOrders(bakeMuttonCommand1);
+        girl.setOrders(bakeMuttonCommand2);
+        girl.setOrders(bakeChickenWingCommand);
+        girl.notifyA();
     }
 
 

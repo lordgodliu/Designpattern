@@ -2,11 +2,11 @@ package com.tabdemo.designpattern.abs_factory;
 
 public interface component {
 
-    public interface Cpu{
+     interface Cpu{
         void showCpuName();
     }
 
-    public interface Battery{
+     interface Battery{
         void showBatteryName();
     }
 }
