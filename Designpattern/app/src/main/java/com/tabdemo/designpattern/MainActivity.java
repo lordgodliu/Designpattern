@@ -4,7 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.tabdemo.designpattern.abs_factory.Factory;
+import com.tabdemo.designpattern.abs_factory.HWPhone;
+import com.tabdemo.designpattern.abs_factory.XIMIPhone;
+import com.tabdemo.designpattern.abs_factory.component;
+import com.tabdemo.designpattern.builder.MyBuild;
+import com.tabdemo.designpattern.builder.MyData;
+import com.tabdemo.designpattern.factory.MyFactory;
+import com.tabdemo.designpattern.factory.Product;
 import com.tabdemo.designpattern.observer.AndroidObervable;
 import com.tabdemo.designpattern.observer.PersonObserver;
 import com.tabdemo.designpattern.observer.diy.WeatherObervable;
@@ -12,18 +21,80 @@ import com.tabdemo.designpattern.observer.diy.WeatherOberver;
 import com.tabdemo.designpattern.proxy.Image;
 import com.tabdemo.designpattern.proxy.ProxyImage;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
 
-        postObs();
-        postDiyObs();
-        proxy();
+
+
+
+
 
     }
+
+    private void initView() {
+        findViewById(R.id.btn0).setOnClickListener(this);
+        findViewById(R.id.btn1).setOnClickListener(this);
+        findViewById(R.id.btn2).setOnClickListener(this);
+        findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.btn4).setOnClickListener(this);
+        findViewById(R.id.btn5).setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn0://build模式
+                Log.d(TAG, "-----------------------------------------------------------------");
+                MyData asknf = new MyBuild().setName("移动电话：").setId(10080).build();
+                Log.d(TAG, "onClick: build模式==>"+ asknf.toString());
+                break;
+
+            case R.id.btn1://代理模式
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 代理模式");
+                proxy();
+                break;
+
+            case R.id.btn2://系统观察者
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 系统观察者");
+                postObs();
+                break;
+
+            case R.id.btn3://自定义观察者
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 自定义观察者");
+                postDiyObs();
+                break;
+            case R.id.btn4://工厂
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 工厂==》tag==1");
+                MyFactory myFactory = new MyFactory();
+                myFactory.CreateProduct(1).methd();
+                break;
+            case R.id.btn5://抽象工厂
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 抽象工厂==》华为手机");
+                HWPhone hwPhone = new HWPhone();
+                hwPhone.createCPU().showCpuName();
+                hwPhone.createBattery().showBatteryName();
+                Log.d(TAG, "-----------------------------------------------------------------");
+                Log.d(TAG, "onClick: 抽象工厂==》小米手机");
+                XIMIPhone ximiPhone = new XIMIPhone();
+                ximiPhone.createCPU().showCpuName();
+                ximiPhone.createBattery().showBatteryName();
+                break;
+
+        }
+    }
+
 
     /**
      * 代理模式测试
@@ -69,17 +140,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void typhoon() {
-            Log.d("xiaoDong","吹台风，要放假了。哈哈！");
+            Log.d("xiaoDong", "吹台风，要放假了。哈哈！");
         }
 
         @Override
         public void sun() {
-            Log.d("xiaoDong","阳光明媚");
+            Log.d("xiaoDong", "阳光明媚");
         }
 
         @Override
         public void rain() {
-            Log.d("xiaoDong","下雨了，带伞");
+            Log.d("xiaoDong", "下雨了，带伞");
         }
     };
 
@@ -87,17 +158,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void typhoon() {
-            Log.d("xiaoMing","吹台风，要放假了。哈哈！");
+            Log.d("xiaoMing", "吹台风，要放假了。哈哈！");
         }
 
         @Override
         public void sun() {
-            Log.d("xiaoMing","阳光明媚");
+            Log.d("xiaoMing", "阳光明媚");
         }
 
         @Override
         public void rain() {
-            Log.d("xiaoMing","下雨了，带伞");
+            Log.d("xiaoMing", "下雨了，带伞");
         }
     };
 

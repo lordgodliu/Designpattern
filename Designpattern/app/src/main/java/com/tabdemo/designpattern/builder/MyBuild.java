@@ -21,7 +21,5 @@ public class MyBuild {
         return this;
     }
 
-    public static void main(String[] args) {
-        new MyBuild().setName("asknf").setId(81249).build();
-    }
+
 }

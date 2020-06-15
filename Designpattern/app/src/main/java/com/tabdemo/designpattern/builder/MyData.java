@@ -11,4 +11,12 @@ public class MyData {
     public void setName(String name) {
         this.name = name+id;
     }
+
+    @Override
+    public String toString() {
+        return "MyData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
